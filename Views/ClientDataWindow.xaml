@@ -1,0 +1,94 @@
+﻿<Window x:Class="ShepScheduler.Views.ClientDataWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:shep="clr-namespace:ShepScheduler.UserControls"
+		xmlns:helpers="clr-namespace:ShepScheduler.Helpers" 
+        Title="Dane klienta" WindowStartupLocation="CenterScreen" Style="{StaticResource WindowStyle}"
+		Height="700px"
+		Width="1000px">
+	<Window.Resources>
+		<helpers:UriToCachedImageConverter x:Key="uriToCachedImageConverter" />
+	</Window.Resources>
+	<TabControl>
+		<TabItem Header=" Dane " FontSize="14px">
+			<StackPanel Orientation="Vertical">
+				<StackPanel Orientation="Horizontal">
+					<Button Name="btnEditClient" Visibility="{Binding Visibility}" Style="{StaticResource ShepButton}" Command="{Binding editClientCommand}" Content="Edytuj"></Button>
+				</StackPanel>
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="6*" />
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition />
+						<RowDefinition />
+						<RowDefinition />
+						<RowDefinition />
+						<RowDefinition />
+					</Grid.RowDefinitions>
+					<TextBlock Style="{StaticResource ShepTextBlock}" Margin="5px 0 10px 10px" Grid.Column="0" Grid.Row="0">Imię</TextBlock>
+					<TextBlock Style="{StaticResource ShepTextBlock}" Text="{Binding ModelWrapper.FirstName, Mode=TwoWay}" Grid.Column="1" Grid.Row="0"></TextBlock>
+
+					<TextBlock Style="{StaticResource ShepTextBlock}" Margin="5px 0 10px 10px" Grid.Column="0" Grid.Row="1">Nazwisko</TextBlock>
+					<TextBlock Style="{StaticResource ShepTextBlock}" Text="{Binding ModelWrapper.LastName, Mode=TwoWay}" Grid.Column="1" Grid.Row="1"></TextBlock>
+
+					<TextBlock Style="{StaticResource ShepTextBlock}" Margin="5px 0 10px 10px" Grid.Column="0" Grid.Row="2">Telefon</TextBlock>
+					<TextBlock Style="{StaticResource ShepTextBlock}" Text="{Binding ModelWrapper.Phone, Mode=TwoWay}" Grid.Column="1" Grid.Row="2"></TextBlock>
+
+					<TextBlock Style="{StaticResource ShepTextBlock}" Margin="5px 0 10px 10px" Grid.Column="0" Grid.Row="3">Komentarz</TextBlock>
+					<TextBlock Style="{StaticResource ShepTextBlock}" Text="{Binding ModelWrapper.Comment, Mode=TwoWay}" Grid.Column="1" Grid.Row="3"></TextBlock>
+
+				</Grid>
+				<ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Visible">
+					<Grid Margin="0 10px 0 0" Height="400px">
+						<DataGrid CellStyle="{StaticResource DataGridCellStyle}" ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}" AutoGenerateColumns="False" ItemsSource="{Binding ModelWrapper.Visits}" CanUserAddRows="false">
+							<DataGrid.Columns>
+								<DataGridTextColumn IsReadOnly="True" Width="*" Header="Zabieg" Binding="{Binding TreatmentName}" />
+								<DataGridTextColumn IsReadOnly="True" Width="*" Header="Od" Binding="{Binding StartDate, StringFormat=dd-MM-yyyy HH:mm}" />
+								<DataGridTextColumn IsReadOnly="True" Width="*" Header="Do" Binding="{Binding EndDate, StringFormat=dd-MM-yyyy HH:mm}" />
+								<DataGridTextColumn IsReadOnly="True" Width="2*" Header="Opis" Binding="{Binding Description}" />
+								<DataGridTextColumn IsReadOnly="True" Width="1.5*" Header="Komentarz" Binding="{Binding Comment}" />
+								<DataGridTemplateColumn>
+									<DataGridTemplateColumn.CellTemplate>
+										<DataTemplate>
+											<Button Visibility="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=DataContext.Visibility, Mode=OneWay}" Style="{StaticResource ShepButton}" Content="Edytuj" Command="{Binding DataContext.openEditWindowCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=DataContext}" />
+										</DataTemplate>
+									</DataGridTemplateColumn.CellTemplate>
+								</DataGridTemplateColumn>
+							</DataGrid.Columns>
+						</DataGrid>
+					</Grid>
+				</ScrollViewer>
+			</StackPanel>
+		</TabItem>
+		<TabItem Header=" Zdjęcia " FontSize="14px">
+			<ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
+				<StackPanel>
+					<StackPanel Orientation="Horizontal">
+						<Button Name="btnOpenFile" Style="{StaticResource ShepButton}" Click="btnOpenFile_Click">Dołącz zdjęcie</Button>
+					</StackPanel>
+					<ListView Name="ClientPhotosList" ItemsSource="{Binding ModelWrapper.Photos, Mode=OneWay}">
+						<ListView.ItemTemplate>
+							<DataTemplate>
+								<StackPanel Orientation="Vertical">
+									<Border BorderThickness="2">
+										<StackPanel Orientation="Vertical">
+											<Image MaxHeight="400px" MaxWidth="500px" Source="{Binding Path, Converter={StaticResource uriToCachedImageConverter}}"/>
+											<StackPanel Orientation="Horizontal">
+												<TextBlock Style="{StaticResource ShepTextBlock}" Text="{Binding Name}" FontWeight="Bold" HorizontalAlignment="Center" />
+												<Button HorizontalAlignment="Right" Style="{StaticResource ShepButton}" Command="{Binding ElementName=ClientPhotosList, Path=DataContext.deletePhotoCommand}" CommandParameter="{Binding}">
+													<TextBlock Text="Usuń" />
+												</Button>
+											</StackPanel>
+										</StackPanel>
+									</Border>
+								</StackPanel>
+							</DataTemplate>
+						</ListView.ItemTemplate>
+					</ListView>
+				</StackPanel>
+			</ScrollViewer>
+		</TabItem>
+	</TabControl>
+</Window>

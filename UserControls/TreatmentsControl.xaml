@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="ShepScheduler.UserControls.TreatmentsControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource UserControlStyle}">
+	<ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
+		<StackPanel Orientation="Vertical" Margin="10px 0 0 0">
+			<StackPanel Orientation="Horizontal">
+				<Button Style="{StaticResource ShepButton}" Command="{Binding NewTreatmentCommand}" Content="Dodaj"></Button>
+			</StackPanel>
+			<Grid x:Name="grid">
+				<DataGrid CellStyle="{StaticResource DataGridCellStyle}" ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}" Style="{StaticResource DataGridStyle}" Width="{Binding ElementName=grid, Path=ActualWidth}" Name="TreatmentsDataGrid" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Treatments, Mode=OneWay}" CanUserAddRows="false">
+					<DataGrid.RowStyle>
+						<Style TargetType="{x:Type DataGridRow}">
+							<EventSetter Event="MouseDoubleClick" Handler="resultDataGrid_MouseDoubleClick"/>
+						</Style>
+					</DataGrid.RowStyle>
+					<DataGrid.Columns>
+						<DataGridTextColumn Width="2*" Header="Nazwa" Binding="{Binding Name}" />
+						<DataGridTextColumn Width="*" Header="Kategoria" Binding="{Binding Category}" />
+						<DataGridTextColumn Width="*" Header="Czas trwania [min]" Binding="{Binding Duration}" />
+						<DataGridTextColumn Width="*" Header="Cena" Binding="{Binding Price}" />
+						<DataGridTemplateColumn>
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate>
+									<Button Style="{StaticResource ShepButton}" Content="Edytuj" Command="{Binding DataContext.EditTreatmentCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=DataContext}" />
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn>
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate>
+									<Button Style="{StaticResource ShepButton}" Content="Usuń" Command="{Binding DataContext.RemoveTreatmentCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=DataContext}" />
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn>
+					</DataGrid.Columns>
+				</DataGrid>
+			</Grid>
+		</StackPanel>
+	</ScrollViewer>
+</UserControl>

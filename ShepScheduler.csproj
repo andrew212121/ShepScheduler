@@ -1,0 +1,342 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{32B6F82B-323C-4111-8151-D874868D06FB}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ShepScheduler</RootNamespace>
+    <AssemblyName>ShepScheduler</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Images\AppIcon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\WpfSqlLite\WpfSqlLite\bin\Debug\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\WpfSqlLite\WpfSqlLite\bin\Debug\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework.Classic" />
+    <Reference Include="SMSApi">
+      <HintPath>..\..\..\DllShared\SMSApi.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>..\WpfSqlLite\WpfSqlLite\bin\Debug\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.EF6">
+      <HintPath>..\WpfSqlLite\WpfSqlLite\bin\Debug\System.Data.SQLite.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq">
+      <HintPath>..\WpfSqlLite\WpfSqlLite\bin\Debug\System.Data.SQLite.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Controls.Input.Toolkit">
+      <HintPath>..\..\FinalCalendar\packages\WPFToolkit.3.5.50211.1\lib\System.Windows.Controls.Input.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Controls.Layout.Toolkit">
+      <HintPath>..\..\FinalCalendar\packages\WPFToolkit.3.5.50211.1\lib\System.Windows.Controls.Layout.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WpfControls, Version=1.0.0.8, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DllShared\WpfControls.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock">
+      <HintPath>..\..\FinalCalendar\packages\Extended.Wpf.Toolkit.2.5\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero">
+      <HintPath>..\..\FinalCalendar\packages\Extended.Wpf.Toolkit.2.5\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro">
+      <HintPath>..\..\FinalCalendar\packages\Extended.Wpf.Toolkit.2.5\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010">
+      <HintPath>..\..\FinalCalendar\packages\Extended.Wpf.Toolkit.2.5\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid">
+      <HintPath>..\..\FinalCalendar\packages\Extended.Wpf.Toolkit.2.5\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit">
+      <HintPath>..\..\FinalCalendar\packages\Extended.Wpf.Toolkit.2.5\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Areas\Calendar\CalendarBuilder.cs" />
+    <Compile Include="Areas\Calendar\ClientProvider.cs" />
+    <Compile Include="Areas\Calendar\TreatmentProvider.cs" />
+    <Compile Include="Areas\Calendar\ViewModels\DaySmsViewModel.cs" />
+    <Compile Include="Areas\Calendar\ViewModels\VisitWrapper.cs" />
+    <Compile Include="Areas\Clients\ViewModels\PhotoWrapper.cs" />
+    <Compile Include="Areas\Clients\ViewModels\ClientWrapper.cs" />
+    <Compile Include="Areas\Statics\ConfigurationData.cs" />
+    <Compile Include="Areas\Treatments\ViewModels\TreatmentWrapper.cs" />
+    <Compile Include="Consts.cs" />
+    <Compile Include="Controls\CircularProgressBar.xaml.cs">
+      <DependentUpon>CircularProgressBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\LoadingPanel.xaml.cs">
+      <DependentUpon>LoadingPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Core\ModelWrapper.cs" />
+    <Compile Include="Core\ValidatorBase.cs" />
+    <Compile Include="Helpers\ImageConverter.cs" />
+    <Compile Include="Helpers\InverseBooleanConverter.cs" />
+    <Compile Include="Helpers\SmsSenderHelper.cs" />
+    <Compile Include="Helpers\SmsTemplateHelper.cs" />
+    <Compile Include="Core\FormViewModelBase.cs" />
+    <Compile Include="Models\Photo.cs" />
+    <Compile Include="Models\SmsVisit.cs" />
+    <Compile Include="Repository\Core\BaseFacade.cs" />
+    <Compile Include="Repository\Core\ICreateModel.cs" />
+    <Compile Include="Repository\Core\IEditModel.cs" />
+    <Compile Include="Repository\Core\IEntity.cs" />
+    <Compile Include="Repository\Facade\ClientPhotosFacade.cs" />
+    <Compile Include="Repository\Facade\ClientsFacade.cs" />
+    <Compile Include="Repository\Facade\CalendarFacade.cs" />
+    <Compile Include="Repository\Facade\TreatmentsFacade.cs" />
+    <Compile Include="Repository\Models\Clients.cs" />
+    <Compile Include="Repository\Models\Treatments.cs" />
+    <Compile Include="Repository\Models\Visits.cs" />
+    <Compile Include="Repository\ShepSchedulerDBContext.cs" />
+    <Compile Include="Services\CalendarService.cs" />
+    <Compile Include="Areas\Calendar\MonthInfo.cs" />
+    <Compile Include="Areas\Calendar\TreatmentColorDecorator.cs" />
+    <Compile Include="Areas\Calendar\ViewModels\CreateVisitViewModel.cs" />
+    <Compile Include="Areas\Calendar\ViewModels\EditVisitViewModel.cs" />
+    <Compile Include="Areas\Calendar\ViewModels\VisitViewModel.cs" />
+    <Compile Include="Areas\Calendar\VisitSpaceDecorator.cs" />
+    <Compile Include="Areas\Calendar\VisitValidator.cs" />
+    <Compile Include="Areas\Clients\ClientValidator.cs" />
+    <Compile Include="Areas\Clients\ViewModels\ClientsDataViewModel.cs" />
+    <Compile Include="Areas\Clients\ViewModels\ClientViewModel.cs" />
+    <Compile Include="Areas\Clients\ViewModels\CreateClientViewModel.cs" />
+    <Compile Include="Areas\Clients\ViewModels\EditClientViewModel.cs" />
+    <Compile Include="Areas\Navigation\ViewModels\ApplicationViewModel.cs" />
+    <Compile Include="Areas\Navigation\ViewModels\CalendarViewModel.cs" />
+    <Compile Include="Areas\Navigation\ViewModels\ClientsViewModel.cs" />
+    <Compile Include="Areas\Navigation\ViewModels\TreatmentsViewModel.cs" />
+    <Compile Include="Areas\Treatments\TreatmentValidator.cs" />
+    <Compile Include="Areas\Treatments\ViewModels\CreateTreatmentViewModel.cs" />
+    <Compile Include="Areas\Treatments\ViewModels\EditTreatmentViewModel.cs" />
+    <Compile Include="Areas\Treatments\ViewModels\TreatmentViewModel.cs" />
+    <Compile Include="Enums\TreatmentCategory.cs" />
+    <Compile Include="Helpers\CryptoHelper.cs" />
+    <Compile Include="Helpers\EnumToBooleanConverter.cs" />
+    <Compile Include="Helpers\LicenseHelper.cs" />
+    <Compile Include="Core\RelayCommand.cs" />
+    <Compile Include="Interfaces\IPageViewModel.cs" />
+    <Compile Include="Models\Client.cs" />
+    <Compile Include="Models\ClientBase.cs" />
+    <Compile Include="Models\Result.cs" />
+    <Compile Include="Models\StaticsRepository.cs" />
+    <Compile Include="Models\Treatment.cs" />
+    <Compile Include="Core\ViewModelBase.cs" />
+    <Compile Include="Services\ClientService.cs" />
+    <Compile Include="Services\SmsService.cs" />
+    <Compile Include="Services\TreatmentService.cs" />
+    <Compile Include="ShepEventArgs\CalendarMonthChangedEventArgs.cs" />
+    <Compile Include="Helpers\FileReaderHelper.cs" />
+    <Compile Include="Models\Visit.cs" />
+    <Compile Include="UserControls\CalendarControl.xaml.cs">
+      <DependentUpon>CalendarControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\CalendarDayControl.xaml.cs">
+      <DependentUpon>CalendarDayControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\CalendarRowControl.xaml.cs">
+      <DependentUpon>CalendarRowControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ClientsControl.xaml.cs">
+      <DependentUpon>ClientsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\TreatmentsControl.xaml.cs">
+      <DependentUpon>TreatmentsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\VisitControl.xaml.cs">
+      <DependentUpon>VisitControl.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Controls\CircularProgressBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\LoadingPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\ClientsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\TreatmentsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ClientDataWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CreateEditTreatmentWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DaySmsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CreateEditClientWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CreateEditVisitWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\ClientDataWindow.xaml.cs">
+      <DependentUpon>ClientDataWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreateEditTreatmentWindow.xaml.cs">
+      <DependentUpon>CreateEditTreatmentWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DaySmsWindow.xaml.cs">
+      <DependentUpon>DaySmsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreateEditClientWindow.xaml.cs">
+      <DependentUpon>CreateEditClientWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreateEditVisitWindow.xaml.cs">
+      <DependentUpon>CreateEditVisitWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="UserControls\CalendarControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\CalendarDayControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\CalendarRowControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\VisitControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <None Include="ShepSchedulerDB.sqlite">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ForwardGreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\add_icon_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\coin-stack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\AppIcon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\phone.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\search_icon.png" />
+    <Content Include="License.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
