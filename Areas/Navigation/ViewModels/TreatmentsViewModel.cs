@@ -12,11 +12,12 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace ShepScheduler.Areas.Navigation.ViewModels
 {
-	public class TreatmentsViewModel : ViewModelBase, IPageViewModel
+	public class TreatmentsViewModel : GridViewModelBase, IPageViewModel
 	{
 		public TreatmentsViewModel()
 		{
@@ -39,6 +40,16 @@ namespace ShepScheduler.Areas.Navigation.ViewModels
 					_isActive = value;
 					RaisePropertyChanged("IsActive");
 				}
+			}
+		}
+		private string _nameFilter;
+		public string NameFilter
+		{
+			get { return _nameFilter; }
+			set
+			{
+				_nameFilter = value;
+				RefreshTreatments();
 			}
 		}
 
@@ -72,7 +83,14 @@ namespace ShepScheduler.Areas.Navigation.ViewModels
 
 		private void RefreshTreatments()
 		{
-			Treatments = new ObservableCollection<Treatment>(TreatmentService.Treatments);
+			if (string.IsNullOrEmpty(NameFilter))
+			{
+				Treatments = new ObservableCollection<Treatment>(TreatmentService.Treatments);
+			}
+			else
+			{
+				Treatments = new ObservableCollection<Treatment>(TreatmentService.Treatments.Where(fi => fi.Name.IndexOf(NameFilter, StringComparison.OrdinalIgnoreCase) >= 0));
+			}
 		}
 
 		public void RemoveTreatment(object p)

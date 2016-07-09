@@ -28,33 +28,40 @@ namespace ShepScheduler.Areas.Calendar.ViewModels
 
 		protected override void SaveVisit()
 		{
-			bool valid = true;
-			if (ModelWrapper.Client == null && ModelWrapper.ClientName != "") 
-			{
-				valid = AddNewClient();
-			} 
-			if (ModelWrapper.Treatment == null && ModelWrapper.TreatmentName != "")
-			{
-				valid = AddNewTreatment();
-			}
-
-			if(valid)
-			{
-				var validator = new VisitValidator(ModelWrapper.Model, MonthInfo);
-				if(validator.Validate())
+			try
+			{ 
+				bool valid = true;
+				if (ModelWrapper.Client == null && ModelWrapper.ClientName != "") 
 				{
-					Result result = CalendarService.AddVisit(ModelWrapper.Model);
-					if (result.NewIndex > 0)
+					valid = AddNewClient();
+				} 
+				if (ModelWrapper.Treatment == null && ModelWrapper.TreatmentName != "")
+				{
+					valid = AddNewTreatment();
+				}
+
+				if(valid)
+				{
+					var validator = new VisitValidator(ModelWrapper.Model, MonthInfo);
+					if(validator.Validate())
 					{
-						ModelWrapper.Model.Id = result.NewIndex;
-						MonthInfo.Visits.Add(ModelWrapper.Model);
-						if (result.Success) OnSuccessSave(this, EventArgs.Empty);
+						Result result = CalendarService.AddVisit(ModelWrapper.Model);
+						if (result.NewIndex > 0)
+						{
+							ModelWrapper.Model.Id = result.NewIndex;
+							MonthInfo.Visits.Add(ModelWrapper.Model);
+							if (result.Success) OnSuccessSave(this, EventArgs.Empty);
+						}
+					}
+					else
+					{
+						ErrorMessage = validator.ErrorMessage;
 					}
 				}
-				else
-				{
-					ErrorMessage = validator.ErrorMessage;
-				}
+			}
+			catch (Exception ex)
+			{
+				ErrorMessage = "Wystąpił błąd. " + ex.Message;
 			}
 		}
 

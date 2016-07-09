@@ -16,7 +16,7 @@ namespace ShepScheduler.Areas.Clients.ViewModels
 	{
 		public EditClientViewModel(ClientWrapper clientWrapper)
 		{
-			ModelWrapper = clientWrapper; //new ClientWrapper(client);
+			ModelWrapper = clientWrapper; 
 			WindowTitle = "Edytuj klienta";
 			SaveAction = ClientService.Edit;
 		}

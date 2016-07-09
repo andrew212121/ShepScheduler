@@ -55,19 +55,27 @@ namespace ShepScheduler.Areas.Treatments.ViewModels
 
 		private void SaveTreatment()
 		{
-			var validator = new TreatmentValidator(ModelWrapper.Model);
-			if (validator.Validate())
+			try
 			{
-				var result = SaveAction(ModelWrapper.Model);
-				if (result.Success)
+				var validator = new TreatmentValidator(ModelWrapper.Model);
+				if (validator.Validate())
 				{
-					OnSuccessSave();
+					var result = SaveAction(ModelWrapper.Model);
+					if (result.Success)
+					{
+						OnSuccessSave();
+					}
+				}
+				else
+				{
+					ErrorMessage = validator.ErrorMessage;
 				}
 			}
-			else
+			catch (Exception ex)
 			{
-				ErrorMessage = validator.ErrorMessage;
+				ErrorMessage = "Wystąpił błąd. "+ex.Message;
 			}
+
 		}
 	}
 }

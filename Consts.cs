@@ -26,6 +26,8 @@ namespace ShepScheduler
 			public const string SmsApiLogin = "SmsApiLogin";
 			public const string SmsApiPassword = "SmsApiPassword";
 			public const string SmsApiSender = "SmsApiSender";
+
+			public const string Environment = "Environment";
 		}
 	}
 }

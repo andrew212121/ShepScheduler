@@ -5,11 +5,17 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource UserControlStyle}">
-	<ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
-		<StackPanel Orientation="Vertical" Margin="10px 0 0 0">
-			<StackPanel Orientation="Horizontal">
-				<Button Style="{StaticResource ShepButton}" Command="{Binding NewTreatmentCommand}" Content="Dodaj"></Button>
-			</StackPanel>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="40px"></RowDefinition>
+			<RowDefinition Height="20*"></RowDefinition>
+		</Grid.RowDefinitions>
+		<StackPanel Orientation="Horizontal" Grid.Row="0">
+			<TextBlock Text="Zabieg" Margin="5px 5px 0 0" />
+			<TextBox Style="{StaticResource ShepTextBox}" Width="200px" Text="{Binding NameFilter, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+			<Button Style="{StaticResource ShepButton}" Command="{Binding NewTreatmentCommand}" Content="Dodaj"></Button>
+		</StackPanel>
+		<ScrollViewer Grid.Column="0" Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Visible">
 			<Grid x:Name="grid">
 				<DataGrid CellStyle="{StaticResource DataGridCellStyle}" ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}" Style="{StaticResource DataGridStyle}" Width="{Binding ElementName=grid, Path=ActualWidth}" Name="TreatmentsDataGrid" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Treatments, Mode=OneWay}" CanUserAddRows="false">
 					<DataGrid.RowStyle>
@@ -32,13 +38,13 @@
 						<DataGridTemplateColumn>
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate>
-									<Button Style="{StaticResource ShepButton}" Content="Usuń" Command="{Binding DataContext.RemoveTreatmentCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=DataContext}" />
+									<Button Visibility="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=DataContext.Visibility, Mode=OneWay}" Style="{StaticResource ShepButton}" Content="Usuń" Command="{Binding DataContext.RemoveTreatmentCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=DataContext}" />
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
 						</DataGridTemplateColumn>
 					</DataGrid.Columns>
 				</DataGrid>
 			</Grid>
-		</StackPanel>
-	</ScrollViewer>
+		</ScrollViewer>
+	</Grid>
 </UserControl>

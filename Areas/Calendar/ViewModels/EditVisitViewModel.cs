@@ -27,30 +27,44 @@ namespace ShepScheduler.Areas.Calendar.ViewModels
 
 		protected override void SaveVisit()
 		{
-			var validator = new VisitValidator(ModelWrapper.Model, MonthInfo);
-
-			ModelWrapper.StartDate = new DateTime(ModelWrapper.VisitDate.Year, ModelWrapper.VisitDate.Month, ModelWrapper.VisitDate.Day, ModelWrapper.StartDate.Hour, ModelWrapper.StartDate.Minute, 0);
-			ModelWrapper.EndDate = new DateTime(ModelWrapper.VisitDate.Year, ModelWrapper.VisitDate.Month, ModelWrapper.VisitDate.Day, ModelWrapper.EndDate.Hour, ModelWrapper.EndDate.Minute, 0);
-
-			if (validator.Validate())
+			try
 			{
-				Result result = CalendarService.EditVisit(ModelWrapper.Model);
-				if (result.Success)
+				var validator = new VisitValidator(ModelWrapper.Model, MonthInfo);
+
+				ModelWrapper.StartDate = new DateTime(ModelWrapper.VisitDate.Year, ModelWrapper.VisitDate.Month, ModelWrapper.VisitDate.Day, ModelWrapper.StartDate.Hour, ModelWrapper.StartDate.Minute, 0);
+				ModelWrapper.EndDate = new DateTime(ModelWrapper.VisitDate.Year, ModelWrapper.VisitDate.Month, ModelWrapper.VisitDate.Day, ModelWrapper.EndDate.Hour, ModelWrapper.EndDate.Minute, 0);
+
+				if (validator.Validate())
 				{
-					OnSuccessSave(this, EventArgs.Empty);
+					Result result = CalendarService.EditVisit(ModelWrapper.Model);
+					if (result.Success)
+					{
+						OnSuccessSave(this, EventArgs.Empty);
+					}
 				}
+			}
+			catch (Exception ex)
+			{
+				ErrorMessage = "Wystąpił błąd. " + ex.Message;
 			}
 		}
 		private void DeleteVisit()
 		{
-			Result result = CalendarService.DeleteVisit(ModelWrapper.Model);
-			if (result.Success)
+			try
 			{
-				if(MonthInfo != null)
-				{ 
-					MonthInfo.Visits.Remove(ModelWrapper.Model);
+				Result result = CalendarService.DeleteVisit(ModelWrapper.Model);
+				if (result.Success)
+				{
+					if(MonthInfo != null)
+					{ 
+						MonthInfo.Visits.Remove(ModelWrapper.Model);
+					}
+					if (onSuccessDelete != null) onSuccessDelete(this, null);
 				}
-				if (onSuccessDelete != null) onSuccessDelete(this, null);
+			}
+			catch (Exception ex)
+			{
+				ErrorMessage = "Wystąpił błąd. " + ex.Message;
 			}
 		}
 

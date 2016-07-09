@@ -120,6 +120,7 @@
     <Compile Include="Controls\LoadingPanel.xaml.cs">
       <DependentUpon>LoadingPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Core\GridViewModelBase.cs" />
     <Compile Include="Core\ModelWrapper.cs" />
     <Compile Include="Core\ValidatorBase.cs" />
     <Compile Include="Helpers\ImageConverter.cs" />
@@ -327,8 +328,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\search_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="License.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -50,18 +50,25 @@ namespace ShepScheduler.Areas.Clients.ViewModels
 
 		private void SaveClient()
 		{
-			var validator = new ClientValidator(ModelWrapper.Model);
-			if (validator.Validate())
+			try
 			{
-				var result = SaveAction(ModelWrapper.Model);
-				if (result.Success)
+				var validator = new ClientValidator(ModelWrapper.Model);
+				if (validator.Validate())
 				{
-					OnSuccessSave(ModelWrapper.Model);
+					var result = SaveAction(ModelWrapper.Model);
+					if (result.Success)
+					{
+						OnSuccessSave(ModelWrapper.Model);
+					}
+				}
+				else
+				{
+					ErrorMessage = validator.ErrorMessage;
 				}
 			}
-			else
+			catch (Exception ex)
 			{
-				ErrorMessage = validator.ErrorMessage;
+				ErrorMessage = "Wystąpił błąd. " + ex.Message;
 			}
 		}
 	}

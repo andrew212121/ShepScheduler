@@ -99,5 +99,18 @@ namespace ShepScheduler.Areas.Statics
 				return _smsApiSender;
 			}
 		}
+
+		private bool? _isTestEnvironment;
+		public bool IsTestEnvironment
+		{
+			get
+			{
+				if (_isTestEnvironment == null)
+				{
+					_isTestEnvironment = ConfigurationManager.AppSettings[Consts.AppConfigKeys.Environment] == "DEV";
+				}
+				return _isTestEnvironment.Value;
+			}
+		}
 	}
 }
